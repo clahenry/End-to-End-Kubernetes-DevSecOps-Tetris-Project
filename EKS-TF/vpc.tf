@@ -8,6 +8,7 @@ data "aws_vpc" "vpc" {
 }
 
 data "aws_internet_gateway" "igw" {
+   vpc_id = aws_vpc.vpc.id
   filter {
     name   = "tag:Name"
     values = [var.igw-name]
