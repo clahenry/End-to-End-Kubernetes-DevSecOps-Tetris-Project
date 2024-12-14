@@ -5,7 +5,7 @@ data "aws_vpc" "vpc" {
   }
 
   filter {
-    name   = "instance-state-name"
+    name   = "Jenkins-server"
     values = ["running"]
   }
 }
