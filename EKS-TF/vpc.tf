@@ -1,28 +1,22 @@
 data "aws_vpc" "vpc" {
-  cidr_block = "10.0.0.0/16"
-
-  tags = {
-    Name   = "var.vpc-name"
+  filter {
+    name   = "tag:Name"
+    values = [var.vpc-name]
   }
 }
 
 data "aws_internet_gateway" "igw" {
-   vpc_id = aws_vpc.vpc.id
-
-  tags = {
-    Name   = "var.vpc-name"
+  filter {
+    name   = "tag:Name"
+    values = [var.igw-name]
   }
 }
 
 data "aws_subnet" "subnet" {
- vpc_id                  =  aws_vpc.vpc.id
- cidr_block              = "10.0.1.0/24"
- availability_zone       = "us-east-1"
- map_public_ip_on_launch = true
-
- tags = {
-   Name = var.subnet-name
- }
+  filter {
+    name   = "tag:Name"
+    values = [var.subnet-name]
+  }
 }
 
 data "aws_security_group" "sg-default" {
@@ -44,10 +38,10 @@ resource "aws_subnet" "public-subnet2" {
 }
 
 resource "aws_route_table" "rt2" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = data.aws_vpc.vpc.id
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id
+    gateway_id = data.aws_internet_gateway.igw.id
   }
 
   tags = {
