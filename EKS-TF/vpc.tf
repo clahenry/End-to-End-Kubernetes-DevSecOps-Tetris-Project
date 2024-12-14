@@ -1,5 +1,6 @@
 data "aws_vpc" "vpc" {
   cidr_block = "10.0.1.0/16"
+
   filter {
     name   = "tag:Name"
     values = [var.vpc-name]
