@@ -4,7 +4,7 @@ data "aws_vpc" "vpc" {
     values = [var.vpc-name]
   }
   filter {
-    name   = "tag:Name"
+    name   = var.vpn-name
     values = ["running"]
   }
 }
