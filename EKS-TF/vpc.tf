@@ -3,6 +3,10 @@ data "aws_vpc" "vpc" {
     name   = "tag:Name"
     values = [var.vpc-name]
   }
+  filter {
+    name   = "tag:Name"
+    values = ["running"]
+  }
 }
 
 data "aws_internet_gateway" "igw" {
