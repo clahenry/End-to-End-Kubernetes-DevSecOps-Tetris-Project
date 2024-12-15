@@ -1,11 +1,8 @@
-data "aws_vpcs" "vpc" {
+data "aws_vpc" "vpc" {
   filter {
     name   = "tag:Name"
     values = [var.vpc-name]
   }
-}
-data "aws_vpc" "vpc" {
-  id = tolist(data.aws_vpcs.vpc.ids)[0]
 }
 
 data "aws_internet_gateway" "igw" {
@@ -39,6 +36,7 @@ resource "aws_subnet" "public-subnet2" {
     Name = var.subnet-name2
   }
 }
+
 resource "aws_route_table" "rt2" {
   vpc_id = data.aws_vpc.vpc.id
   route {
