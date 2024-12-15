@@ -1,12 +1,11 @@
-data "aws_vpc" "vpc" {
+data "aws_vpcs" "vpc" {
   filter {
     name   = "tag:Name"
     values = [var.vpc-name]
   }
-  filter {
-    name   = "instance-state-name"
-    values = ["running"]
-  }
+}
+data "aws_vpc" "vpc" {
+  id = tolist(data.aws_vpcs.vpc.ids)[0]
 }
 
 data "aws_internet_gateway" "igw" {
