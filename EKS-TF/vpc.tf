@@ -1,4 +1,6 @@
 data "aws_vpc" "vpc" {
+  service      = "s3"
+  service_type = "vpc"
   filter {
     name   = "tag:Name"
     values = [var.vpc-name]
