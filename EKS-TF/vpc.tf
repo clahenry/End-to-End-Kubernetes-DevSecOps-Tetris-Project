@@ -4,7 +4,7 @@ data "aws_vpc" "vpc" {
     values = [var.vpc-name]
   }
   filter {
-    name   = var.vpc-name
+    name   = "Jenkins-server"
     values = ["running"]
   }
 }
