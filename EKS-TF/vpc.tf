@@ -8,11 +8,8 @@ data "aws_vpc" "vpc" {
 data "aws_internet_gateway" "igw" {
   filter {
     name   = "tag:Name"
-    values = [tgw-attach-12345678]
+    values = [var.igw-name]
   }
-}
-data "aws_ec2_transit_gateway_peering_attachment" "attachment" {
-  id = "tgw-attach-12345678"
 }
 
 data "aws_subnet" "subnet" {
